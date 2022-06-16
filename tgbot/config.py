@@ -14,12 +14,13 @@ class DbConfig:
 @dataclass
 class TgBot:
     token: str
-    admin_ids: list[int]
+    admin_ids: int
     use_redis: bool
 
 
 @dataclass
 class Miscellaneous:
+    banned_users: int
     other_params: str = None
 
 
@@ -46,5 +47,7 @@ def load_config(path: str = None):
             user=env.str('DB_USER'),
             database=env.str('DB_NAME')
         ),
-        misc=Miscellaneous()
+        misc=Miscellaneous(
+            banned_users=list(map(int, env.list("BANNED_USERS")))
+        )
     )
