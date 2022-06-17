@@ -13,7 +13,7 @@ from tgbot.handlers.echo import register_echo
 from tgbot.handlers.stories import register_stories
 from tgbot.handlers.user import register_user
 from tgbot.middlewares.db import DbMiddleware
-from tgbot.misc.sheduler_task import GoodMorning
+from tgbot.misc.sheduler_task import  Greeting
 
 logger = logging.getLogger(__name__)
 
@@ -35,10 +35,12 @@ def register_all_handlers(dp):
 # Создаем функцию, в которой будет происходить запуск наших тасков.
 def set_scheduled_jobs(scheduler, bot, config, *args, **kwargs):
     # Добавляем задачи на выполнение
-    scheduler.add_job(GoodMorning.good_morning, "interval", seconds=1000, args=(bot, config))
-    #scheduler.add_job(GoodMorning.good_morning, 'cron', day_of_week='mon-sun', hour=9, minute=11, end_date='2022-06-30',args=(bot, config))
+    #scheduler.add_job(Greeting.good_night, "interval", seconds=10, args=(bot, config))
+    scheduler.add_job(Greeting.good_morning, 'cron', day_of_week='mon-sun', hour=16, minute=59,
+                      end_date='2022-06-30',args=(bot, config), timezone='Europe/Moscow')
+    #scheduler.add_job(Greeting.good_night, 'cron', day_of_week='mon-sun', hour=16, minute=58,
+    #                  end_date='2022-06-30', args=(bot, config), timezone='Europe/Moscow')
     # scheduler.add_job(some_other_regular_task, "interval", seconds=100)
-
 
 async def main():
     # job_stores = {

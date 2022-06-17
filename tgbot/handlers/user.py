@@ -2,8 +2,11 @@ from aiogram import Dispatcher
 from aiogram.dispatcher.filters import CommandStart
 from aiogram.types import Message
 
+from tgbot.models.model import User
+
 
 async def user_start(message: Message):
+    User.get_or_create(message.from_user.id)
     await message.reply(f"Привет, {message.from_user.full_name}!")
 
 async def user_help(message: Message):

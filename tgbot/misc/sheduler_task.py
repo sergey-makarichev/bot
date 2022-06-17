@@ -1,9 +1,11 @@
-import emojis as emojis
+import random
 from aiogram import Bot
 
 from tgbot.config import Config
+from tgbot.models.model import User
 
-class GoodMorning:
+
+class Greeting:
     red_heart = "\U00002764"
     pink_heart = "\U0001F497"
     purple_heart = "\U0001F49C"
@@ -26,7 +28,24 @@ class GoodMorning:
                f"{morn} моя прелестная{hand_heart}{cat_kiss}", f"{morn} моя самая ласковая{point_heart}",
                f"{morn} сексуальная девочоночка{point_heart}{red_heart}", f"{morn} мышонок{cat_kiss}{face_heart}",
                f"{morn} золотце{face_heart}{purple_heart}", f"{morn} мелодия моего сердца{red_heart}{face_heart}"]
-    it = 0
+
+    nht = {1: "Сладких снов, ", 2: "Доброй ночи, ", 3: "Добрых снов, ", 4: "Приятных сновидений, "}
+    night = [f"моя прелесть{red_heart}", f"мой любимый зайчик{cat_kiss}{pink_heart}",
+               f"незабудочка{hand_heart}{purple_heart}", f"моя доброжелательная красавица{face_heart}{point_heart}",
+               f"мой красивенький котёночек{pink_heart}{purple_heart}", f"малышка{pink_heart}{hand_heart}",
+               f"моя любименькая{purple_heart}{point_heart}", f"моя эстетик гёрлочка{red_heart}",
+               f"мамаситочка{cat_kiss}{pink_heart}", f"золотце{hand_heart}{pink_heart}",
+               f"драгоценная моя{purple_heart}", f"моя нежная прелесть{hand_heart}",
+               f"моя самая любименькая{hand_heart}{purple_heart}",
+               f"радость моя{pink_heart}{hand_heart}", f"драгоценный цветочек{point_heart}",
+               f"сладкая булочка{red_heart}", f"лисичка моя{cat_kiss}{pink_heart}",
+               f"манящая бусинка{cat_kiss}{pink_heart}", f"ангельская малышка{pink_heart}",
+               f"сладкая штучка{hand_heart}{cat_kiss}", f"невообразимая миледи{point_heart}",
+               f"моя искромётная милашка{point_heart}{red_heart}", f"чудо{cat_kiss}{face_heart}",
+               f"моя самая красивенькая{face_heart}{purple_heart}", f"изысканная мамзель{red_heart}{face_heart}"]
+
+    morn_it = 0
+    night_it = 0
 
     @classmethod
     def __init__(cls):
@@ -34,11 +53,22 @@ class GoodMorning:
 
     @classmethod
     async def good_morning(cls, bot: Bot, config: Config):
-        if cls.it >= len(cls.morning):
+        if cls.morn_it >= len(cls.morning):
             cls.it = 0
-        mes = cls.morning[cls.it]
-        cls.it+=1
-        await bot.send_message(text=mes, chat_id=782459013)
+        mes = cls.morning[cls.morn_it]
+        cls.morn_it+=1
+        for user in User.get_keys():
+            await bot.send_message(text=mes, chat_id=user)
+
+    @classmethod
+    async def good_night(cls, bot: Bot, config: Config):
+        if cls.night_it >= len(cls.night):
+            cls.it = 0
+        mes = cls.nht[random.randint(1, 4)] + cls.night[cls.night_it]
+        cls.night_it += 1
+        for user in User.get_keys():
+            await bot.send_message(text=mes, chat_id=user)
+        #await bot.send_message(text=mes, chat_id=782459013)
 
 
 
