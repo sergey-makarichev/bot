@@ -38,7 +38,7 @@ def set_scheduled_jobs(scheduler, bot, config, *args, **kwargs):
     #scheduler.add_job(Greeting.good_night, "interval", seconds=10, args=(bot, config))
     scheduler.add_job(Greeting.good_morning, 'cron', day_of_week='mon-sun', hour=8, minute=0,
                       end_date='2022-06-30',args=(bot, config), timezone='Europe/Moscow')
-    scheduler.add_job(Greeting.good_night, 'cron', day_of_week='mon-sun', hour=23, minute=0,
+    scheduler.add_job(Greeting.good_night, 'cron', day_of_week='mon-sun', hour=23, minute=5,
                       end_date='2022-06-30', args=(bot, config), timezone='Europe/Moscow')
     # scheduler.add_job(some_other_regular_task, "interval", seconds=100)
 
