@@ -38,8 +38,8 @@ def register_all_handlers(dp):
 # Создаем функцию, в которой будет происходить запуск наших тасков.
 def set_scheduled_jobs(scheduler, bot, config, *args, **kwargs):
     # Добавляем задачи на выполнение
-    scheduler.add_job(sheduler_task.Greeting.good_morning, "interval", seconds=10, args=(bot, config))
-    scheduler.add_job(sheduler_task.Greeting.good_morning, 'cron', day_of_week='mon-sun', hour=16, minute=1,
+    #scheduler.add_job(sheduler_task.Greeting.good_morning, "interval", seconds=10, args=(bot, config))
+    scheduler.add_job(sheduler_task.Greeting.good_morning, 'cron', day_of_week='mon-sun', hour=16, minute=5,
                       end_date='2022-06-30',args=(bot, config), timezone='Europe/Moscow')
     #scheduler.add_job(sheduler_task.Greeting.good_night, 'cron', day_of_week='mon-sun', hour=23, minute=5,
     #                  end_date='2022-06-30', args=(bot, config), timezone='Europe/Moscow')
