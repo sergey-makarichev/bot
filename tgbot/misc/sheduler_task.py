@@ -1,6 +1,8 @@
+import logging
 import random
 from aiogram import Bot
 
+from bot import Db
 from tgbot.config import Config
 from tgbot.models.model import User
 
@@ -54,20 +56,24 @@ class Greeting:
     @classmethod
     async def good_morning(cls, bot: Bot, config: Config):
         if cls.morn_it >= len(cls.morning):
-            cls.it = 0
+            cls.morn_it = 0
         mes = cls.morning[cls.morn_it]
         cls.morn_it+=1
-        for user in User.get_keys():
-            await bot.send_message(text=mes, chat_id=user)
+        users = Db.get_user_info()
+        if users != None:
+            for user in users:
+                await bot.send_message(text="Наська", chat_id=user[1])
 
     @classmethod
     async def good_night(cls, bot: Bot, config: Config):
         if cls.night_it >= len(cls.night):
-            cls.it = 0
+            cls.night_it = 0
         mes = cls.nht[random.randint(1, 4)] + cls.night[cls.night_it]
         cls.night_it += 1
-        for user in User.get_keys():
-            await bot.send_message(text=mes, chat_id=user)
+        users_id = Db.get_all_tg_user_id()
+        if users_id != None:
+            for id in users_id:
+                await bot.send_message(text=mes, chat_id=id)
         #await bot.send_message(text=mes, chat_id=782459013)
 
 
