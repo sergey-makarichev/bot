@@ -2,3 +2,4 @@ aiogram~=2.18
 aioredis~=2.0
 environs~=9.0
 apscheduler~=3.9
+psycopg2~=2.9.3

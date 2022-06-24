@@ -1,7 +1,7 @@
 import asyncio
 import logging
 from tgbot.models.dbmodel import BotDB
-Db = BotDB('accountant.db')
+Db = BotDB("postgres://douxxtcijcujuw:7912cbc4a248b1c730ed76481668e25bd13297359799d8156e6bcadc84a4fd26@ec2-44-206-89-185.compute-1.amazonaws.com:5432/dcs09ssmduju94")
 
 from aiogram import Bot, Dispatcher
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
